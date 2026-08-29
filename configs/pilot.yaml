@@ -1,0 +1,38 @@
+name: phase0b_pilot
+confirmatory: false
+seeds: [100, 101, 102, 103, 104, 105, 106, 107, 108, 109]
+episodes_per_seed: 12
+
+landscape:
+  dimension: 32
+  block_size: 4
+  interaction_strength: 0.30
+  deceptive_bonus: 0.72
+  optimum_bonus: 1.0
+  interaction_edges: 10
+
+search:
+  population_size: 24
+  elite_size: 6
+  mutation_rate: 0.08
+  memory_bias: 0.35
+  t_min: 4
+  t_max: 64
+  fixed_depth: 16
+  hazard_threshold: 4.0
+  b0: -1.0
+  b_stagnation: 0.25
+  b_gain: 5.0
+  b_uncertainty: 1.2
+  b_diversity: 1.0
+
+memory:
+  learning_rate: 0.12
+  decay: 0.08
+  clip: 2.5
+
+metric:
+  cost_weight: 0.25
+  support_ratio: 0.90
+  bootstrap_samples: 1000
+  mechanism_margin: 0.02
