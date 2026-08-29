@@ -15,6 +15,7 @@ class LandscapeConfig:
     deceptive_bonus: float = 0.72
     optimum_bonus: float = 1.0
     interaction_edges: int = 8
+    decoy_compatible_edge_fraction: float = 0.0
 
 
 @dataclass(frozen=True)

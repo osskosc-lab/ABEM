@@ -1,0 +1,22 @@
+{
+  "G0_IMPLEMENTATION": {
+    "status": "PASS",
+    "reason": "normalization, target matching, replay, seed and kernel audits passed: {'target_matched_across_all_levels': True, 'target_normalized_score_is_one': True, 'iid_replay_exact': True, 'search_kernel_frozen': True, 'controller_evaluated': False, 'target_information_exposed_to_agent': False}"
+  },
+  "G1_FAMILY_SCREEN": {
+    "status": "FAIL",
+    "reason": "no development family passed the monotonic paired gate"
+  },
+  "G2_FREEZE": {
+    "status": "NOT_EVALUATED",
+    "reason": "stopped after G1 failure"
+  },
+  "G3_BLIND_REPLICATION": {
+    "status": "NOT_EVALUATED",
+    "reason": "stopped before blind replication"
+  },
+  "G4_LABEL_VALIDATION": {
+    "status": "NOT_EVALUATED",
+    "reason": "difficulty labels are not assigned before successful replication"
+  }
+}
