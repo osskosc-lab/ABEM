@@ -1,7 +1,7 @@
 {
   "phase": "phase0b_r1f",
   "verdict": "BOUNDARY_OVERFIT",
-  "git_commit_sha": "740f4bf3130f87b53cd245674f0e018df8c7a058",
+  "git_commit_sha": "be4aa460865f2d3476ae85ed7e4f537159dfb7f9",
   "config_path": "configs/phase0b_r1f.yaml",
   "config_snapshot": {
     "name": "phase0b_r1f",
