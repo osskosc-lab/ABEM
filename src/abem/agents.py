@@ -41,13 +41,12 @@ def _mean_pairwise_hamming(population: np.ndarray) -> float:
     n = population.shape[0]
     if n < 2:
         return 0.0
-    total = 0.0
-    pairs = 0
-    for i in range(n - 1):
-        distances = np.mean(population[i + 1 :] != population[i], axis=1)
-        total += float(np.sum(distances))
-        pairs += len(distances)
-    return total / max(pairs, 1)
+    # For each bit, k * (n-k) unordered pairs disagree. This is exactly the
+    # loop definition above but avoids a Python loop inside every Oracle rollout.
+    ones = np.sum(population, axis=0, dtype=np.int64)
+    disagreeing_bits = np.sum(ones * (n - ones), dtype=np.int64)
+    pairs = n * (n - 1) / 2
+    return float(disagreeing_bits / (pairs * population.shape[1]))
 
 
 def _propose(
