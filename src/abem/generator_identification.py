@@ -368,6 +368,19 @@ def _decision_note(summary: dict) -> str:
     selected = summary.get("selected_family")
     replication = summary.get("blind_replication")
     failed = [name for name, value in summary["gates"].items() if value["status"] == "FAIL"]
+    selection_text = json.dumps(
+        {
+            "selected_family": selected,
+            "decision": summary["selection_decision"],
+        },
+        ensure_ascii=False,
+        indent=2,
+    )
+    freeze_text = (
+        f"`{summary['freeze_git_sha']}`。blind replication前にfamilyとlevelsを保存した。"
+        if summary.get("freeze_git_sha")
+        else "`NOT_EVALUATED`。G1失敗のためfamily/levelsはfreezeしていない。"
+    )
     return f"""# ABEM Phase 0B-r2G Decision Note
 
 ## 総合判定
@@ -396,11 +409,11 @@ PR #3の`DIFFICULTY_MANIPULATION_FAIL`を保持した。MVOC-Bは未評価であ
 
 ## 採用または不採用理由
 
-{json.dumps(selected, ensure_ascii=False, indent=2)}
+{selection_text}
 
 ## Freeze時点
 
-`{summary.get('freeze_git_sha', 'NOT_EVALUATED')}`。blind replication前にfamilyとlevelsを保存した。
+{freeze_text}
 
 ## Blind replication
 
@@ -508,6 +521,11 @@ def run_phase(config_path: str | Path = "configs/phase0b_r2g.yaml", output_dir: 
         "implementation_audit": audit,
         "family_screening": family_results,
         "selected_family": selected,
+        "selection_decision": (
+            f"Selected {selected['family']} with frozen levels {selected['levels']} under the preregistered priority."
+            if selected
+            else "No family was adopted: every full or contiguous three-plus-level window failed the monotonic paired development gate."
+        ),
         "freeze_git_sha": freeze["git_commit_sha_before_blind_replication"],
         "blind_replication": replication_stats,
         "difficulty_labels": labels,
