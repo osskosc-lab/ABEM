@@ -1,0 +1,76 @@
+name: phase0b_r2g
+confirmatory: false
+bootstrap_samples: 5000
+success_score_threshold: 0.99
+forbidden_r2v_seeds: [210, 211, 212, 213, 214, 215, 216, 217, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231]
+forbidden_confirmatory_seed_min: 1000
+forbidden_confirmatory_seed_max: 1029
+
+screening:
+  seeds: [300, 301, 302, 303, 304, 305, 306, 307, 308, 309]
+  episodes_per_seed: 16
+replication:
+  seeds: [320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 335, 336, 337, 338, 339]
+  episodes_per_seed: 16
+  single_use: true
+
+search:
+  population_size: 24
+  elite_size: 6
+  mutation_rate: 0.08
+  memory_bias: 0.0
+  t_min: 4
+  t_max: 64
+  fixed_depth: 32
+  hazard_threshold: 4.0
+  b0: -1.0
+  b_stagnation: 0.25
+  b_gain: 5.0
+  b_uncertainty: 1.2
+  b_diversity: 1.0
+metric:
+  cost_weight: 0.25
+  support_ratio: 0.90
+  bootstrap_samples: 5000
+  mechanism_margin: 0.02
+landscape:
+  dimension: 32
+  block_size: 4
+
+families:
+  FAMILY_A_DECEPTION_ONLY:
+    complexity_rank: 0
+    fixed:
+      interaction_edges: 0
+      interaction_strength: 0.0
+      optimum_bonus: 1.0
+      decoy_compatible_edge_fraction: 0.0
+    levels:
+      A1: {deceptive_bonus: 0.45}
+      A2: {deceptive_bonus: 0.65}
+      A3: {deceptive_bonus: 0.80}
+      A4: {deceptive_bonus: 0.90}
+  FAMILY_B_INTERACTION_DENSITY_ONLY:
+    complexity_rank: 1
+    fixed:
+      deceptive_bonus: 0.72
+      interaction_strength: 0.20
+      optimum_bonus: 1.0
+      decoy_compatible_edge_fraction: 0.0
+    levels:
+      B1: {interaction_edges: 0}
+      B2: {interaction_edges: 4}
+      B3: {interaction_edges: 10}
+      B4: {interaction_edges: 18}
+  FAMILY_C_CONFLICTING_INTERACTIONS:
+    complexity_rank: 2
+    fixed:
+      deceptive_bonus: 0.72
+      interaction_edges: 12
+      interaction_strength: 0.25
+      optimum_bonus: 1.0
+    levels:
+      C1: {decoy_compatible_edge_fraction: 0.00}
+      C2: {decoy_compatible_edge_fraction: 0.25}
+      C3: {decoy_compatible_edge_fraction: 0.50}
+      C4: {decoy_compatible_edge_fraction: 0.75}
