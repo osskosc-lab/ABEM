@@ -635,6 +635,19 @@ synthetic search環境で、現在の探索状態に依存するAdaptive Boundar
 
 `score_std`はfuture valueとの想定符号に反し、uncertainty削除はFULL_ABを悪化させなかった。したがってepistemic uncertainty機構としては支持しない。
 
+## F1–F10反証診断
+
+- F1 Time-only: validation oracle-relative error `{diagnostics['validation_policy_oracle_regret']['TIME_ONLY']:.6f}`でFULL_ABより低く、FULL_ABは経過時間baselineを超えない。
+- F2 Stagnation-only: `{diagnostics['validation_policy_oracle_regret']['STAGNATION_ONLY']:.6f}`でFULL_ABより高い。単純patienceへの完全縮約は、この比較だけからは成立しない。
+- F3 Random matched: `{diagnostics['validation_policy_oracle_regret']['RANDOM_MATCHED']:.6f}`でFULL_ABより低く、state-dependent停止の追加価値はvalidationで支持されない。
+- F4 Temporal shuffle: shuffleによる増分 `{diagnostics['validation_policy_oracle_regret']['SIGNAL_SHUFFLED'] - diagnostics['validation_policy_oracle_regret']['FULL_AB']:.6f}`。時間対応には情報がある。
+- F5 Feature deletion: uncertaintyとdiversityの削除は悪化を生まず、必要機構として主張しない。stagnation削除は大幅に悪化した。
+- F6 Sign test: `{json.dumps(diagnostics['signal_direction_pass'], ensure_ascii=False)}`。`score_std`はSIGNAL_MISSPECIFIED。
+- F7 Equal budget: FULL_AB − fixedのnormalized regret差 `{diagnostics['equal_budget_quality_delta']:.6f}`で、同計算量のfixed searchより品質が悪い。
+- F8 Difficulty adaptation: EASY→RUGGEDで停止時刻が増えず、事前期待に反する。
+- F9 Difficulty-blind permutation: blind policyのvalidation oracle-relative error `{diagnostics['validation_policy_oracle_regret']['DIFFICULTY_BLIND']:.6f}`はFULL_ABを悪化させず、context依存性を支持しない。
+- F10 Metric robustness: `{json.dumps(diagnostics['metric_sensitivity'], ensure_ascii=False)}`。方向反転はなく`METRIC_FRAGILE`ではない。
+
 ## Difficulty adaptation
 
 - intact: `{json.dumps(diagnostics['validation_stop_step_by_difficulty'], ensure_ascii=False)}`
@@ -646,7 +659,7 @@ synthetic search環境で、現在の探索状態に依存するAdaptive Boundar
 
 ## 残る最小主張
 
-判定ラベルと通過Gateが許す範囲に限定する。単純baselineを超えない場合、複雑なAdaptive Boundaryの必要性は主張しない。
+checkpoint信号はOracle STOP/CONTINUEをある程度予測し、時間shuffleで性能が崩れるため、探索履歴に予測情報が存在することまでは残る。ただしその情報を現在のhazard式で停止利得へ変換できず、複雑なAdaptive Boundaryの必要性は支持されない。
 
 ## Claim Firewall
 
