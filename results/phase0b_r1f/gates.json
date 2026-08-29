@@ -1,0 +1,26 @@
+{
+  "G0_REPLAY": {
+    "pass": true,
+    "reason": "runtime checkpoint replay matched population, scores, best score, and cumulative hazard"
+  },
+  "G1_PREDICTIVE_INFORMATION": {
+    "pass": true,
+    "reason": "validation AUROC=0.7850; threshold > 0.60"
+  },
+  "G2_SIMPLE_BASELINE": {
+    "pass": false,
+    "reason": "FULL_AB-RANDOM_MATCHED mean=0.004072, 95% CI upper=0.009119"
+  },
+  "G3_TEMPORAL_MECHANISM": {
+    "pass": true,
+    "reason": "shuffle-full oracle regret=0.034341"
+  },
+  "G4_DIFFICULTY_ADAPTATION": {
+    "pass": false,
+    "reason": "rugged-easy gap intact=-0.6667, blind=-0.7708"
+  },
+  "G5_VALIDATION": {
+    "pass": false,
+    "reason": "calibration direction=-0.001118, validation direction=0.004072"
+  }
+}

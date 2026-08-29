@@ -9,6 +9,7 @@ description = "Adaptive Boundary Exploration with Memory — Phase 0 falsificati
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+  "matplotlib>=3.8",
   "numpy>=1.26",
   "PyYAML>=6.0",
 ]

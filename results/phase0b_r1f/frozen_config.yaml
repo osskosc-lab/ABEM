@@ -1,0 +1,131 @@
+source_config:
+  name: phase0b_r1f
+  confirmatory: false
+  calibration_seeds:
+  - 100
+  - 101
+  - 102
+  - 103
+  - 104
+  - 105
+  validation_seeds:
+  - 106
+  - 107
+  - 108
+  - 109
+  episodes_per_seed: 12
+  checkpoint_horizons:
+  - 4
+  - 8
+  - 16
+  - 32
+  oracle_rollouts_per_checkpoint: 32
+  fixed_depth_candidates:
+  - 8
+  - 16
+  - 32
+  - 64
+  patience_candidates:
+  - 2
+  - 4
+  - 8
+  - 16
+  difficulty_order:
+  - EASY
+  - MEDIUM
+  - RUGGED
+  difficulty_blind_max_ratio: 0.5
+  metric_sensitivity_values:
+  - 0.1
+  - 0.5
+  landscape:
+    dimension: 32
+    block_size: 4
+    deceptive_bonus: 0.72
+    optimum_bonus: 1.0
+    interaction_edges: 10
+  difficulties:
+    EASY:
+      interaction_strength: 0.1
+    MEDIUM:
+      interaction_strength: 0.3
+    RUGGED:
+      interaction_strength: 0.6
+  search:
+    population_size: 24
+    elite_size: 6
+    mutation_rate: 0.08
+    memory_bias: 0.0
+    t_min: 4
+    t_max: 64
+    fixed_depth: 16
+    hazard_threshold: 4.0
+    b0: -1.0
+    b_stagnation: 0.25
+    b_gain: 5.0
+    b_uncertainty: 1.2
+    b_diversity: 1.0
+  metric:
+    cost_weight: 0.25
+    support_ratio: 0.9
+    bootstrap_samples: 5000
+    mechanism_margin: 0.02
+  boundary_candidates:
+  - name: CURRENT
+    parameters:
+      hazard_threshold: 4.0
+      b0: -1.0
+      b_stagnation: 0.25
+      b_gain: 5.0
+      b_uncertainty: 1.2
+      b_diversity: 1.0
+  - name: CONSERVATIVE
+    parameters:
+      hazard_threshold: 6.0
+      b0: -1.5
+      b_stagnation: 0.25
+      b_gain: 5.0
+      b_uncertainty: 1.2
+      b_diversity: 1.0
+  - name: STAGNATION_HEAVY
+    parameters:
+      hazard_threshold: 4.0
+      b0: -1.0
+      b_stagnation: 0.5
+      b_gain: 2.5
+      b_uncertainty: 0.6
+      b_diversity: 0.5
+  - name: LOW_SIGNAL
+    parameters:
+      hazard_threshold: 4.0
+      b0: -1.0
+      b_stagnation: 0.25
+      b_gain: 2.5
+      b_uncertainty: 0.6
+      b_diversity: 0.5
+frozen:
+  fixed_depth: 32
+  fixed_depth_mean_efficiency_error:
+    '8': 0.3265506816640346
+    '16': 0.23880963649474604
+    '32': 0.21577000532515747
+    '64': 0.29056341325361423
+  patience: 8
+  patience_mean_efficiency_error:
+    '2': 0.311489036299399
+    '4': 0.2453333691828997
+    '8': 0.21778194995785294
+    '16': 0.24052153444773688
+  boundary_candidate: CONSERVATIVE
+  boundary_oracle_regret:
+    CURRENT: 0.0023550158841093762
+    CONSERVATIVE: -0.00997267855326064
+    STAGNATION_HEAVY: 0.030157436235094932
+    LOW_SIGNAL: 0.013054635502264423
+  boundary_parameters:
+    hazard_threshold: 6.0
+    b0: -1.5
+    b_stagnation: 0.25
+    b_gain: 5.0
+    b_uncertainty: 1.2
+    b_diversity: 1.0
