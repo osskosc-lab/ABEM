@@ -1,0 +1,49 @@
+name: phase0b_r2v
+confirmatory: false
+alpha: 0.5
+checkpoint_horizons: [4, 8, 16, 32]
+oracle_rollouts_per_checkpoint: 32
+p0_candidates: [4, 8, 12, 16]
+delta_p_candidates: [4, 8, 16]
+forbidden_confirmatory_seed_min: 1000
+forbidden_confirmatory_seed_max: 1029
+
+d0:
+  seeds: [200, 201, 202, 203, 204, 205]
+  episodes_per_seed: 16
+  fixed_search_depth: 32
+d1:
+  seeds: [210, 211, 212, 213, 214, 215, 216, 217]
+  episodes_per_seed: 16
+d2:
+  seeds: [220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231]
+  episodes_per_seed: 16
+  single_use: true
+
+landscape:
+  dimension: 32
+  block_size: 4
+  optimum_bonus: 1.0
+generators:
+  G1: {deceptive_bonus: 0.55, interaction_edges: 4, interaction_strength: 0.10}
+  G2: {deceptive_bonus: 0.72, interaction_edges: 10, interaction_strength: 0.30}
+  G3: {deceptive_bonus: 0.88, interaction_edges: 18, interaction_strength: 0.50}
+search:
+  population_size: 24
+  elite_size: 6
+  mutation_rate: 0.08
+  memory_bias: 0.0
+  t_min: 4
+  t_max: 64
+  fixed_depth: 32
+  hazard_threshold: 4.0
+  b0: -1.0
+  b_stagnation: 0.25
+  b_gain: 5.0
+  b_uncertainty: 1.2
+  b_diversity: 1.0
+metric:
+  cost_weight: 0.25
+  support_ratio: 0.90
+  bootstrap_samples: 5000
+  mechanism_margin: 0.02

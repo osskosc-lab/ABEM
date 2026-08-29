@@ -1,0 +1,26 @@
+{
+  "G0_IMPLEMENTATION": {
+    "pass": true,
+    "reason": "checkpoint replay exact"
+  },
+  "G1_DIFFICULTY": {
+    "pass": false,
+    "reason": "observed {'G1': 0.21854102366255143, 'G2': 0.21770833333333348, 'G3': 0.20866285403050108}"
+  },
+  "G2_SIGNAL_REPLICATION": {
+    "pass": false,
+    "reason": "not run after G1 failure"
+  },
+  "G3_PRIMARY_EFFECT": {
+    "pass": false,
+    "reason": "not run after G1 failure"
+  },
+  "G4_GAIN_MECHANISM": {
+    "pass": false,
+    "reason": "not run after G1 failure"
+  },
+  "G5_GENERALIZATION": {
+    "pass": false,
+    "reason": "not run after G1 failure"
+  }
+}

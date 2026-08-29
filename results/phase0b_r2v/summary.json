@@ -1,0 +1,75 @@
+{
+  "phase": "phase0b_r2v",
+  "verdict": "DIFFICULTY_MANIPULATION_FAIL",
+  "git_commit_sha": "3e46d931a833297269e695a39af2a07594092281",
+  "difficulty_validation": {
+    "pass": false,
+    "required_order": "G1 < G2 < G3",
+    "observed_mean_efficiency_error": {
+      "G1": 0.21854102366255143,
+      "G2": 0.21770833333333348,
+      "G3": 0.20866285403050108
+    },
+    "generator_configs": {
+      "G1": {
+        "dimension": 32,
+        "block_size": 4,
+        "interaction_strength": 0.1,
+        "deceptive_bonus": 0.55,
+        "optimum_bonus": 1.0,
+        "interaction_edges": 4
+      },
+      "G2": {
+        "dimension": 32,
+        "block_size": 4,
+        "interaction_strength": 0.3,
+        "deceptive_bonus": 0.72,
+        "optimum_bonus": 1.0,
+        "interaction_edges": 10
+      },
+      "G3": {
+        "dimension": 32,
+        "block_size": 4,
+        "interaction_strength": 0.5,
+        "deceptive_bonus": 0.88,
+        "optimum_bonus": 1.0,
+        "interaction_edges": 18
+      }
+    }
+  },
+  "frozen": {},
+  "primary_effect": {},
+  "gain_shuffle": {},
+  "oracle_signal_replication": {},
+  "boundary_behavior_audit": {},
+  "calibration_vs_validation": {},
+  "gates": {
+    "G0_IMPLEMENTATION": {
+      "pass": true,
+      "reason": "checkpoint replay exact"
+    },
+    "G1_DIFFICULTY": {
+      "pass": false,
+      "reason": "observed {'G1': 0.21854102366255143, 'G2': 0.21770833333333348, 'G3': 0.20866285403050108}"
+    },
+    "G2_SIGNAL_REPLICATION": {
+      "pass": false,
+      "reason": "not run after G1 failure"
+    },
+    "G3_PRIMARY_EFFECT": {
+      "pass": false,
+      "reason": "not run after G1 failure"
+    },
+    "G4_GAIN_MECHANISM": {
+      "pass": false,
+      "reason": "not run after G1 failure"
+    },
+    "G5_GENERALIZATION": {
+      "pass": false,
+      "reason": "not run after G1 failure"
+    }
+  },
+  "remaining_minimal_claim": "generator difficulty manipulationが成立せず、adaptive boundary比較を実行していない。",
+  "claim_firewall": "本結果はsynthetic search environmentの停止効率だけを扱う。量子デコヒーレンス、量子的コヒーレンス、AI意識、AI創造性、ブレイクスルー能力、新・有効ノイズ理論全体を実証しない。",
+  "confirmatory_data_used": false
+}
