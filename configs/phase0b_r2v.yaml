@@ -1,0 +1,58 @@
+name: phase0b_r2v
+confirmatory: false
+execution_lock: D0_ONLY
+prior_phase: phase0b_r1f
+prior_phase_seeds: [100, 101, 102, 103, 104, 105, 106, 107, 108, 109]
+
+seed_partitions:
+  D0_DIFFICULTY: [200, 201, 202, 203, 204, 205]
+  D1_CALIBRATION: [210, 211, 212, 213, 214, 215, 216, 217]
+  D2_BLIND_VALIDATION: [220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231]
+
+confirmatory_config: configs/confirmatory.yaml
+forbid_confirmatory_access: true
+
+search:
+  population_size: 24
+  elite_size: 6
+  mutation_rate: 0.08
+  memory_bias: 0.0
+  t_min: 4
+  t_max: 64
+
+minimal_boundary:
+  alpha: 0.5
+  patience_candidates: [4, 8, 12, 16]
+  delta_p_candidates: [4, 8, 16]
+  g0_rule: median_positive_ema_gain_D1
+  features: [stagnation, recent_gain]
+  forbidden_features: [score_std, diversity]
+  cumulative_hazard: false
+
+metric:
+  cost_weight: 0.25
+  bootstrap_samples: 5000
+
+D0_difficulty_validation:
+  fixed_depth: 32
+  status: UNVALIDATED
+  required_order: G1_LT_G2_LT_G3
+  generators:
+    G1:
+      deceptive_bonus: 0.55
+      interaction_edges: 4
+      interaction_strength: 0.10
+    G2:
+      deceptive_bonus: 0.72
+      interaction_edges: 10
+      interaction_strength: 0.30
+    G3:
+      deceptive_bonus: 0.88
+      interaction_edges: 18
+      interaction_strength: 0.50
+
+stage_rules:
+  D0_DIFFICULTY: allowed
+  D1_CALIBRATION: requires_D0_PASS
+  D2_BLIND_VALIDATION: requires_D1_FREEZE
+  PHASE0C: forbidden
